@@ -1,8 +1,15 @@
 require('dotenv').config();
 const ask = require('./OpenAI/openai');
 const axios = require('axios');
+const express = require('express');
 const { Client, Events, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Embed, MessageManager } = require('discord.js');
 const { TOKEN: token } = process.env;
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Server for Brain Bot');
+})
 
 const prefix = '!'
 
@@ -146,3 +153,4 @@ client.on('messageCreate', async (message) => {
 });
 
 client.login(token);
+app.listen(process.env.PORT || 3000);
