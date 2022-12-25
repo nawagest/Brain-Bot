@@ -2,7 +2,7 @@ require('dotenv').config();
 const ask = require('./OpenAI/openai');
 const axios = require('axios');
 const express = require('express');
-const rateLimit = reqiure('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const { Client, Events, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Embed, MessageManager } = require('discord.js');
 const { TOKEN: token } = process.env;
 
