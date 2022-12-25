@@ -58,7 +58,7 @@ client.on('messageCreate', async (message) => {
                 const name = command.slice(8);
                 const data = await axios(`https://restcountries.com/v3.1/name/${name}`);
     
-                const { name: { common: countryName }, region, latlng, flags: { png: flagPng }, population } = data.data[0];
+                const { name: { common: countryName }, region, latlng, flags: { png: flagPng }, population, capital } = data.data[0];
     
                 const embed = new EmbedBuilder()
                     .setColor('#DFBDC9')
@@ -66,6 +66,7 @@ client.on('messageCreate', async (message) => {
                     .setDescription(`Region: ${region}`)
                     .setThumbnail(flagPng)
                     .addFields(
+                        { name: 'Capital', value: `${capital}` },
                         { name: 'Latitude and Longitude:', value: `(${latlng})` },
                         { name: 'Population:', value: `${population}` }
                     )
