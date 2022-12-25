@@ -6,9 +6,10 @@ const { Client, Events, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, Butto
 const { TOKEN: token } = process.env;
 
 const app = express();
+app.use(express.static('static'));
 
 app.get('/', (req, res) => {
-    res.send('Server for Brain Bot');
+    res.send('./static/index.html');
 })
 
 const prefix = '!'
@@ -153,4 +154,4 @@ client.on('messageCreate', async (message) => {
 });
 
 client.login(token);
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3001);
