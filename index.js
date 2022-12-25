@@ -2,15 +2,25 @@ require('dotenv').config();
 const ask = require('./OpenAI/openai');
 const axios = require('axios');
 const express = require('express');
+const rateLimit = reqiure('express-rate-limit');
 const { Client, Events, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Embed, MessageManager } = require('discord.js');
 const { TOKEN: token } = process.env;
 
 const app = express();
+
+const limiter = rateLimit({
+    windowMs: 5 * 60 * 1000,
+    max: 5,
+    standardHeaders: false,
+    legacyHeaders: false,
+});
+
 app.use(express.static('static'));
+app.use(limiter)
 
 app.get('/', (req, res) => {
     res.send('./static/index.html');
-})
+});
 
 const prefix = '!'
 
