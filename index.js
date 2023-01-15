@@ -2,8 +2,7 @@ require('dotenv').config();
 const ask = require('./OpenAI/openai');
 const axios = require('axios');
 const express = require('express');
-const rateLimit = require('express-rate-limit');
-const { Client, Events, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Embed, MessageManager } = require('discord.js');
+const { Client, Events, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, Embed, MessageManager } = require('discord.js');
 const { TOKEN: token } = process.env;
 
 const app = express();
@@ -16,7 +15,6 @@ const limiter = rateLimit({
 });
 
 app.use(express.static('static'));
-app.use(limiter)
 
 app.get('/', (req, res) => {
     res.send('./static/index.html');
@@ -30,6 +28,20 @@ client.on('ready', (c) => {
     console.log(`Ready! Logged in as ${client.user.tag}`);
     client.user.setStatus('dnd');
     client.user.setActivity({ name: 'Thinking... 🧠' })
+});
+
+client.on('debug', (a)=>{
+    if (a.startsWith(`Hit a 429`)) {
+        process.kill(1);
+    }
+});
+
+client.on("rateLimit", data => {
+    process.kill(1);
+});
+
+client.on('rateLimited', () => {
+    process.kill(1);
 });
 
 client.on('messageCreate', async (message) => {
@@ -66,7 +78,7 @@ client.on('messageCreate', async (message) => {
                     .setDescription(`Region: ${region}`)
                     .setThumbnail(flagPng)
                     .addFields(
-                        { name: 'Capital', value: `${capital}` },
+                        { name: 'Capital:', value: `${capital}` },
                         { name: 'Latitude and Longitude:', value: `(${latlng})` },
                         { name: 'Population:', value: `${population}` }
                     )
