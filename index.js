@@ -7,13 +7,6 @@ const { TOKEN: token } = process.env;
 
 const app = express();
 
-const limiter = rateLimit({
-    windowMs: 5 * 60 * 1000,
-    max: 5,
-    standardHeaders: false,
-    legacyHeaders: false,
-});
-
 app.use(express.static('static'));
 
 app.get('/', (req, res) => {
@@ -45,8 +38,8 @@ client.on('rateLimited', () => {
 });
 
 client.on('messageCreate', async (message) => {
-    if (message.content.startsWith('!')) {
-        const command = message.content.split('!')[1];
+    if (message.content.startsWith(prefix)) {
+        const command = message.content.split(prefix)[1];
         if (command === 'hello') message.react('👋');
         if (command.startsWith('calc')) {
             const equation = (command.slice(5));
