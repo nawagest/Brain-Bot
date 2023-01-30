@@ -41,14 +41,6 @@ client.on('messageCreate', async (message) => {
     if (message.content.startsWith(prefix)) {
         const command = message.content.split(prefix)[1];
         if (command === 'hello') message.react('👋');
-        if (command.startsWith('calc')) {
-            const equation = (command.slice(5));
-            if(!equation) {
-                message.reply('Please give me an equation to solve 😢');
-                return;
-            }
-            message.reply(`The answer to the equation ***${equation}*** is ${eval(equation)}`)
-        }
         if (command.startsWith('chat')) {
             const gptPrompt = command.slice(5);
             if(!gptPrompt) {
@@ -56,6 +48,7 @@ client.on('messageCreate', async (message) => {
                 return;
             };
             const response = await ask(gptPrompt);
+            // create a timeout function so that if it takes to long it can cancel the request
             message.reply(response.choices[0].text);
         }
         if (command.startsWith('country')) {
@@ -155,7 +148,6 @@ client.on('messageCreate', async (message) => {
                 .setDescription('This is the list of all my commands!')
                 .addFields(
                     { name: '`!`hello', value: 'I react with a simple waving emoji 👋' },
-                    { name: '`!`calc (`expression to be solved`)', value: 'I can solve any javascript expression 😉' },
                     { name: '`!`country (`country name`)', value: 'Search any country around the world 🌎' },
                     { name: '`!`chat (`message`)', value: 'Talk to me whenever you feel like it. I have answers to everything 💪!' },
                     { name: '`!`bored', value: 'Feeling bored? You wont be bored after running this command 🙃!' },
