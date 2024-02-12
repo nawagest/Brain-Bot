@@ -111,75 +111,77 @@ client.on("messageCreate", async (message) => {
       message.reply(activity);
     }
     if (command === "tod") {
-      message.reply("Truth or Dare?");
+    //   message.reply("Truth or Dare?");
 
-      const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("truth")
-          .setLabel("Truth")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("dare")
-          .setLabel("Dare")
-          .setStyle(ButtonStyle.Danger),
-      );
+    //   const row = new ActionRowBuilder().addComponents(
+    //     new ButtonBuilder()
+    //       .setCustomId("truth")
+    //       .setLabel("Truth")
+    //       .setStyle(ButtonStyle.Primary),
+    //     new ButtonBuilder()
+    //       .setCustomId("dare")
+    //       .setLabel("Dare")
+    //       .setStyle(ButtonStyle.Danger),
+    //   );
 
-      const filter = (i) =>
-        (i.customId === "truth" || i.customId === "dare") &&
-        i.user.id === message.author.id;
+    //   const filter = (i) =>
+    //     (i.customId === "truth" || i.customId === "dare") &&
+    //     i.user.id === message.author.id;
 
-      const collector = message.channel.createMessageComponentCollector({
-        filter,
-        time: 15000,
-      });
+    //   const collector = message.channel.createMessageComponentCollector({
+    //     filter,
+    //     time: 15000,
+    //   });
 
-      collector.on("collect", async (i) => {
-        if (i.customId === "truth") {
-          axios("https://cghqj5-3000.csb.app/api/truth")
-            .then(async (data) => {
-              await i.update({ content: `${data.data}`, components: [] });
-            })
-            .catch((err) => {
-              if (err)
-                message.reply(
-                  "Something went wrong 😢. Please try running the command again!",
-                );
-              console.log(err);
-            });
-        }
-        if (i.customId === "dare") {
-          axios("https://cghqj5-3000.csb.app/api/dare")
-            .then(async (data) => {
-              await i.update({ content: `${data.data}`, components: [] });
-            })
-            .catch((err) => {
-              if (err)
-                message.reply(
-                  "Something went wrong 😢. Please try running the command again!",
-                );
-              console.log(err);
-            });
-        }
-      });
+    //   collector.on("collect", async (i) => {
+    //     if (i.customId === "truth") {
+    //       axios("https://cghqj5-3000.csb.app/api/truth")
+    //         .then(async (data) => {
+    //           await i.update({ content: `${data.data}`, components: [] });
+    //         })
+    //         .catch((err) => {
+    //           if (err)
+    //             message.reply(
+    //               "Something went wrong 😢. Please try running the command again!",
+    //             );
+    //           console.log(err);
+    //         });
+    //     }
+    //     if (i.customId === "dare") {
+    //       axios("https://cghqj5-3000.csb.app/api/dare")
+    //         .then(async (data) => {
+    //           await i.update({ content: `${data.data}`, components: [] });
+    //         })
+    //         .catch((err) => {
+    //           if (err)
+    //             message.reply(
+    //               "Something went wrong 😢. Please try running the command again!",
+    //             );
+    //           console.log(err);
+    //         });
+    //     }
+    //   });
 
-      collector.on("end", (collected) => {
-        return;
-      });
+    //   collector.on("end", (collected) => {
+    //     return;
+    //   });
 
-      message.reply({ content: "Truth or Dare?", components: [row] });
+    //   message.reply({ content: "Truth or Dare?", components: [row] });
+        message.reply("Sorry this command no longer works :(")
     }
     if (command === "wyr") {
-      axios("https://cghqj5-3000.csb.app/api/wyr")
-        .then((data) => {
-          message.reply(data.data);
-        })
-        .catch((err) => {
-          if (err)
-            message.reply(
-              "Something went wrong 😢. Please try running the command again!",
-            );
-          console.log(err);
-        });
+    //   axios("https://cghqj5-3000.csb.app/api/wyr")
+    //     .then((data) => {
+    //       message.reply(data.data);
+    //     })
+    //     .catch((err) => {
+    //       if (err)
+    //         message.reply(
+    //           "Something went wrong 😢. Please try running the command again!",
+    //         );
+    //       console.log(err);
+    //     });
+        message.reply('Sorry this command no longer works :(')
     }
     if (command === "commands" || command === "cmds" || command === "help") {
       const embed = new EmbedBuilder()
@@ -205,11 +207,11 @@ client.on("messageCreate", async (message) => {
           },
           {
             name: "`!`tod",
-            value: "I dare you to play some truth or dare with your friends 👀",
+            value: "I dare you to play some truth or dare with your friends 👀 (command no longer works unfortunately 😢)",
           },
           {
             name: "`!`wyr",
-            value: "Play some fun would you rather with friends 💭!",
+            value: "Play some fun would you rather with friends 💭! (command no longer works unfortunately 😢)",
           },
         )
         .setFooter({
