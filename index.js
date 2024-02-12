@@ -135,7 +135,7 @@ client.on("messageCreate", async (message) => {
 
       collector.on("collect", async (i) => {
         if (i.customId === "truth") {
-          axios("https://5cl2h3-3000.csb.app/api/truth")
+          axios("https://cghqj5-3000.csb.app/api/truth")
             .then(async (data) => {
               await i.update({ content: `${data.data}`, components: [] });
             })
@@ -148,7 +148,7 @@ client.on("messageCreate", async (message) => {
             });
         }
         if (i.customId === "dare") {
-          axios("https://5cl2h3-3000.csb.app/api/dare")
+          axios("https://cghqj5-3000.csb.app/api/dare")
             .then(async (data) => {
               await i.update({ content: `${data.data}`, components: [] });
             })
@@ -169,7 +169,7 @@ client.on("messageCreate", async (message) => {
       message.reply({ content: "Truth or Dare?", components: [row] });
     }
     if (command === "wyr") {
-      axios("hhttps://5cl2h3-3000.csb.app/api/wyr")
+      axios("https://cghqj5-3000.csb.app/api/wyr")
         .then((data) => {
           message.reply(data.data);
         })
